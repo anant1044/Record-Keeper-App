@@ -3,6 +3,9 @@ package com.anantjava.recordkeeper
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -34,21 +37,19 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             add(R.id.fragment_container, RunningFragment())
         }
 
-        onBackPressedDispatcher.addCallback{
-            showdialog()
-        }
+        onBackPressedDispatcher.addCallback { showdialog() }
 
     }
 
     private fun showdialog() {
+
         AlertDialog.Builder(this)
-            .setTitle("Warning!!")
-            .setMessage("You are about to leave the App. Are you sure you want to exit?")
-            .setPositiveButton("Yes") {_, _ ->
-                finish()
-            }
-            .setNegativeButton("No") {dialog, _ -> dialog.dismiss()}
+            .setTitle("Warning")
+            .setMessage("Are you sure you want to exit?")
+            .setPositiveButton("Yes") { _, _ -> finish() }
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
             .show()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,10 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         }
 
         return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(it: MenuItem) = when (it.itemId) {
