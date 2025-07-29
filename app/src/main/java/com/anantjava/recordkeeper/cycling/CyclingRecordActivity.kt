@@ -1,10 +1,11 @@
-package com.anantjava.recordkeeper
+package com.anantjava.recordkeeper.cycling
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.anantjava.recordkeeper.R
 
 class CyclingRecordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

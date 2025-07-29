@@ -3,8 +3,6 @@ package com.anantjava.recordkeeper
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -12,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.commit
+import com.anantjava.recordkeeper.cycling.CyclingFragment
 import com.anantjava.recordkeeper.databinding.ActivityMainBinding
+import com.anantjava.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         AlertDialog.Builder(this)
             .setTitle("Warning")
-            .setMessage("Are you sure you want to exit?")
+           // .setMessage("Are you sure you want to exit?")
+            .setView(R.layout.dialog_layout)
             .setPositiveButton("Yes") { _, _ -> finish() }
             .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
             .show()

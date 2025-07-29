@@ -16,4 +16,9 @@
     <string name="reset_running_records">Reset Running Records</string>
     <string name="reset_cycling_records">Reset Cycling Records</string>
     <string name="reset_all_records">Reset All Records</string>
+    <string name="warning">Are you sure you want to exit?</string>
+    <string name="clear_records_string">Clear Records</string>
+    <string name="save_string">Save</string>
+    <string name="date_String">Date</string>
+    <string name="record_time_string">Record Time</string>
 </resources>

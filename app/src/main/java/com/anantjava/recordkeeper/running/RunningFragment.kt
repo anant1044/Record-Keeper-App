@@ -1,5 +1,6 @@
-package com.anantjava.recordkeeper
+package com.anantjava.recordkeeper.running
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,6 +30,18 @@ class RunningFragment : Fragment() {
         binding.container10km.setOnClickListener{setupClickRunningRecord("10km") }
         binding.containerHalfmarathon.setOnClickListener{setupClickRunningRecord("Half Marathon") }
         binding.containerMarathon.setOnClickListener { setupClickRunningRecord("Marathon") }
+
+        val references = requireContext().getSharedPreferences("records", Context.MODE_PRIVATE)
+
+        binding.textView5kmRecord.text = references.getString("5km record", null)
+        binding.textView5kmDate.text = references.getString("5km date", null)
+        binding.textView10kmRecord.text = references.getString("10km record", null)
+        binding.textView10kmDate.text = references.getString("10km date", null)
+        binding.textViewHalfmarathonRecord.text = references.getString("Half Marathon record", null)
+        binding.textViewHalfmarathonDate.text = references.getString("Half Marathon date", null)
+        binding.textViewMarathonRecord.text = references.getString("Marathon record", null)
+        binding.textViewMarathonDate.text = references.getString("Marathon date", null)
+
     }
 
 

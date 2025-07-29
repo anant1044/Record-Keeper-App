@@ -1,4 +1,4 @@
-package com.anantjava.recordkeeper
+package com.anantjava.recordkeeper.cycling
 
 import android.content.Intent
 import android.os.Bundle
