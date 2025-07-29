@@ -1,6 +1,7 @@
 package com.anantjava.recordkeeper.running
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -28,7 +29,19 @@ class RunningRecordActivity : AppCompatActivity()
         val distance = intent.getStringExtra("Distance")
         title = "$distance Record"
 
-        binding.buttonSaveRecords.setOnClickListener { saveRecords(distance) }
+        displayRecords(distance)
+
+        binding.buttonSaveRecords.setOnClickListener {
+            saveRecords(distance)
+            finish()
+        }
+    }
+
+    private fun displayRecords(distance: String?) {
+        val references = getSharedPreferences("records", MODE_PRIVATE)
+
+        binding.editTextRecord.setText(references.getString("$distance record", null))
+        binding.editTextDate.setText(references.getString("$distance date", null))
     }
 
     private fun saveRecords(distance: String?) {

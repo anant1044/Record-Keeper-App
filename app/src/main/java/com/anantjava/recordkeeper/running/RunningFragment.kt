@@ -26,13 +26,18 @@ class RunningFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.container5km.setOnClickListener{setupClickRunningRecord("5km")}
-        binding.container10km.setOnClickListener{setupClickRunningRecord("10km") }
-        binding.containerHalfmarathon.setOnClickListener{setupClickRunningRecord("Half Marathon") }
-        binding.containerMarathon.setOnClickListener { setupClickRunningRecord("Marathon") }
+        setupOnClickListeners()
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayRecords()
+    }
+
+    private fun displayRecords() {
         val references = requireContext().getSharedPreferences("records", Context.MODE_PRIVATE)
-
         binding.textView5kmRecord.text = references.getString("5km record", null)
         binding.textView5kmDate.text = references.getString("5km date", null)
         binding.textView10kmRecord.text = references.getString("10km record", null)
@@ -41,7 +46,13 @@ class RunningFragment : Fragment() {
         binding.textViewHalfmarathonDate.text = references.getString("Half Marathon date", null)
         binding.textViewMarathonRecord.text = references.getString("Marathon record", null)
         binding.textViewMarathonDate.text = references.getString("Marathon date", null)
+    }
 
+    private fun setupOnClickListeners() {
+        binding.container5km.setOnClickListener { setupClickRunningRecord("5km") }
+        binding.container10km.setOnClickListener { setupClickRunningRecord("10km") }
+        binding.containerHalfmarathon.setOnClickListener { setupClickRunningRecord("Half Marathon") }
+        binding.containerMarathon.setOnClickListener { setupClickRunningRecord("Marathon") }
     }
 
 
