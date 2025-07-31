@@ -1,7 +1,7 @@
 package com.anantjava.recordkeeper.running
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -10,9 +10,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.anantjava.recordkeeper.R
 import com.anantjava.recordkeeper.databinding.ActivityRunningRecordBinding
 
-class RunningRecordActivity : AppCompatActivity()
-{
+class RunningRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRunningRecordBinding
+    private lateinit var references: SharedPreferences
+    private val distance: String? by lazy { intent.getStringExtra("Distance") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,28 +26,27 @@ class RunningRecordActivity : AppCompatActivity()
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        references = getSharedPreferences("records", MODE_PRIVATE)
 
-        val distance = intent.getStringExtra("Distance")
+
         title = "$distance Record"
 
-        displayRecords(distance)
 
+        displayRecords()
         binding.buttonSaveRecords.setOnClickListener {
-            saveRecords(distance)
+            saveRecords()
             finish()
         }
     }
 
-    private fun displayRecords(distance: String?) {
-        val references = getSharedPreferences("records", MODE_PRIVATE)
+    private fun displayRecords() {
 
         binding.editTextRecord.setText(references.getString("$distance record", null))
         binding.editTextDate.setText(references.getString("$distance date", null))
     }
 
-    private fun saveRecords(distance: String?) {
+    private fun saveRecords() {
 
-        val references = getSharedPreferences("records", MODE_PRIVATE)
 
         references.edit {
             putString("$distance record", binding.editTextRecord.text.toString())
