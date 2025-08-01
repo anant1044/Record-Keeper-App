@@ -27,8 +27,12 @@ class CyclingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupOnClickListeners()
-        displayrecords()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayrecords()
     }
 
     private fun displayrecords() {
@@ -38,15 +42,32 @@ class CyclingFragment : Fragment() {
         binding.textviewLongrideDate.text = references.getString("Longest Ride date", null)
         binding.textViewBiggestclimbRecord.text = references.getString("Biggest Climb record", null)
         binding.textviewBiggestclimbDate.text = references.getString("Biggest Climb date", null)
-        binding.textViewBstAvgSpeedRecord.text = references.getString("Best Average Speed record", null)
-        binding.textviewBestavgspeedDate.text = references.getString("Best Average Speed date", null)
+        binding.textViewBstAvgSpeedRecord.text =
+            references.getString("Best Average Speed record", null)
+        binding.textviewBestavgspeedDate.text =
+            references.getString("Best Average Speed date", null)
 
     }
 
     private fun setupOnClickListeners() {
-        binding.containerLongestride.setOnClickListener { setupClicklistener("Longest Ride", "Distance") }
-        binding.containerBiggestclimb.setOnClickListener { setupClicklistener("Biggest Climb", "Height") }
-        binding.containerBestavgspd.setOnClickListener { setupClicklistener("Best Average Speed", "Average Speed") }
+        binding.containerLongestride.setOnClickListener {
+            setupClicklistener(
+                "Longest Ride",
+                "Distance"
+            )
+        }
+        binding.containerBiggestclimb.setOnClickListener {
+            setupClicklistener(
+                "Biggest Climb",
+                "Height"
+            )
+        }
+        binding.containerBestavgspd.setOnClickListener {
+            setupClicklistener(
+                "Best Average Speed",
+                "Average Speed"
+            )
+        }
     }
 
     private fun setupClicklistener(distance: String, hint: String) {
