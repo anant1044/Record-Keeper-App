@@ -1,4 +1,4 @@
-package com.anantjava.recordkeeper.running
+package com.anantjava.recordkeeper.editrecord
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,22 +8,27 @@ import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.anantjava.recordkeeper.R
-import com.anantjava.recordkeeper.databinding.ActivityRunningRecordBinding
+import com.anantjava.recordkeeper.databinding.ActivityEditRecordBinding
+import java.io.Serializable
 
-class RunningRecordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRunningRecordBinding
+class EditRecordActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEditRecordBinding
     private val references: SharedPreferences by lazy {
         getSharedPreferences(
-            "records",
+            screenData.sharedpreference,
             MODE_PRIVATE
         )
     }
-    private val distance: String? by lazy { intent.getStringExtra("Distance") }
+
+    private val screenData: ScreenData by lazy {
+        intent.getSerializableExtra("screendata") as ScreenData
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityRunningRecordBinding.inflate(layoutInflater)
+        binding = ActivityEditRecordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -38,7 +43,8 @@ class RunningRecordActivity : AppCompatActivity() {
     }
 
     private fun setupUi() {
-        title = "$distance Record"
+        title = "${screenData.record} Record"
+        binding.textInputLayoutRecord.hint = screenData.recordHint
         binding.buttonSaveRecords.setOnClickListener {
             saveRecords()
             finish()
@@ -52,24 +58,29 @@ class RunningRecordActivity : AppCompatActivity() {
 
     private fun displayRecords() {
 
-        binding.editTextRecord.setText(references.getString("$distance record", null))
-        binding.editTextDate.setText(references.getString("$distance date", null))
+        binding.editTextRecord.setText(references.getString("${screenData.record} record", null))
+        binding.editTextDate.setText(references.getString("${screenData.record} date", null))
     }
 
     private fun saveRecords() {
 
 
         references.edit {
-            putString("$distance record", binding.editTextRecord.text.toString())
-            putString("$distance date", binding.editTextDate.text.toString())
+            putString("${screenData.record} record", binding.editTextRecord.text.toString())
+            putString("${screenData.record} date", binding.editTextDate.text.toString())
         }
     }
 
     private fun clearRecords() {
         references.edit {
-            remove("$distance record")
-            remove("$distance date")
+            remove("${screenData.record} record")
+            remove("${screenData.record} date")
         }
     }
 
+    data class ScreenData(
+        val recordHint: String,
+        val record: String,
+        val sharedpreference: String
+    ) : Serializable
 }

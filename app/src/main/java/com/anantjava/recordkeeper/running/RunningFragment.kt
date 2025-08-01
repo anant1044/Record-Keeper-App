@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.anantjava.recordkeeper.databinding.RunningFragmentBinding
+import com.anantjava.recordkeeper.editrecord.EditRecordActivity
 
 class RunningFragment : Fragment() {
 
@@ -57,8 +58,8 @@ class RunningFragment : Fragment() {
 
 
     private fun setupClickRunningRecord(distance: String) {
-        val intent = Intent(context, RunningRecordActivity::class.java)
-        intent.putExtra("Distance", distance)
+        val intent = Intent(context, EditRecordActivity::class.java)
+        intent.putExtra("screendata", EditRecordActivity.ScreenData("Time", distance, "records"))
         startActivity(intent)
     }
 
