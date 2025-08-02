@@ -66,20 +66,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         val menuclickHandle = when (item.itemId) {
             R.id.item_resetrunning -> {
-
-                getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
+                clearRecordsDialog("running")
                 true
-
             }
 
             R.id.item_resetcycling -> {
-                getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
+                clearRecordsDialog("cycling")
                 true
             }
 
             R.id.item_resetall -> {
-                getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
-                getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
+                clearRecordsDialog("all")
                 true
             }
 
@@ -87,20 +84,37 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 super.onOptionsItemSelected(item)
             }
         }
+        return menuclickHandle
+    }
 
+    private fun clearRecordsDialog(selected: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Reset $selected Records")
+            .setMessage("Are you sure you want to delete the records?")
+            .setPositiveButton("Yes") { _, _ ->
+                when (selected) {
+                    "all" -> {
+                        getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
+                    }
+
+                    else -> {
+                        getSharedPreferences(selected, Context.MODE_PRIVATE).edit { clear() }
+                    }
+                }
+                refreshCurrentFragment()
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    private fun refreshCurrentFragment() {
         when (binding.bottomNav.selectedItemId) {
 
             R.id.running_icon -> onRunningCLicked()
             R.id.cycling_icon -> onCyclingCLicked()
             else -> {}
-
-
         }
-
-
-
-        return menuclickHandle
-
     }
 
     private fun onRunningCLicked(): Boolean {
