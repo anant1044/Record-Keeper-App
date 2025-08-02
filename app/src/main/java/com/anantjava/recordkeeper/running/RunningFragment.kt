@@ -38,7 +38,7 @@ class RunningFragment : Fragment() {
     }
 
     private fun displayRecords() {
-        val references = requireContext().getSharedPreferences("records", Context.MODE_PRIVATE)
+        val references = requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
         binding.textView5kmRecord.text = references.getString("5km record", null)
         binding.textView5kmDate.text = references.getString("5km date", null)
         binding.textView10kmRecord.text = references.getString("10km record", null)
@@ -59,7 +59,7 @@ class RunningFragment : Fragment() {
 
     private fun setupClickRunningRecord(distance: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screendata", EditRecordActivity.ScreenData("Time", distance, "records"))
+        intent.putExtra("screendata", EditRecordActivity.ScreenData("Time", distance, "running"))
         startActivity(intent)
     }
 

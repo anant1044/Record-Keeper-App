@@ -36,7 +36,7 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayrecords() {
-        val references = requireContext().getSharedPreferences("records", Context.MODE_PRIVATE)
+        val references = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
 
         binding.textViewLongrideRecord.text = references.getString("Longest Ride record", null)
         binding.textviewLongrideDate.text = references.getString("Longest Ride date", null)
@@ -72,7 +72,7 @@ class CyclingFragment : Fragment() {
 
     private fun setupClicklistener(distance: String, hint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screendata", EditRecordActivity.ScreenData(hint, distance, "records"))
+        intent.putExtra("screendata", EditRecordActivity.ScreenData(hint, distance, "cycling"))
         startActivity(intent)
 
 
