@@ -16,6 +16,7 @@ import com.anantjava.recordkeeper.cycling.CyclingFragment
 import com.anantjava.recordkeeper.databinding.ActivityMainBinding
 import com.anantjava.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -103,9 +104,20 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                     }
                 }
                 refreshCurrentFragment()
+                showConfirmation()
             }
             .setNegativeButton("No", null)
             .show()
+    }
+
+    private fun showConfirmation() {
+        val snackbar = Snackbar.make(
+            binding.root,
+            "All records are deleted successfully!",
+            Snackbar.LENGTH_SHORT
+        )
+        snackbar.show()
+        snackbar.anchorView = binding.bottomNav
     }
 
     private fun refreshCurrentFragment() {
