@@ -2,6 +2,7 @@ package com.anantjava.recordkeeper.editrecord
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -44,6 +45,16 @@ class EditRecordActivity : AppCompatActivity() {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setupUi() {
         title = "${screenData.record} Record"
         binding.textInputLayoutRecord.hint = screenData.recordHint
@@ -60,16 +71,32 @@ class EditRecordActivity : AppCompatActivity() {
 
     private fun displayRecords() {
 
-        binding.editTextRecord.setText(references.getString("${screenData.record} $SHARED_PREFERENCES_RECORD_KEY", null))
-        binding.editTextDate.setText(references.getString("${screenData.record} $SHARED_PREFERENCES_DATE_KEY", null))
+        binding.editTextRecord.setText(
+            references.getString(
+                "${screenData.record} $SHARED_PREFERENCES_RECORD_KEY",
+                null
+            )
+        )
+        binding.editTextDate.setText(
+            references.getString(
+                "${screenData.record} $SHARED_PREFERENCES_DATE_KEY",
+                null
+            )
+        )
     }
 
     private fun saveRecords() {
 
 
         references.edit {
-            putString("${screenData.record} $SHARED_PREFERENCES_RECORD_KEY", binding.editTextRecord.text.toString())
-            putString("${screenData.record} $SHARED_PREFERENCES_DATE_KEY", binding.editTextDate.text.toString())
+            putString(
+                "${screenData.record} $SHARED_PREFERENCES_RECORD_KEY",
+                binding.editTextRecord.text.toString()
+            )
+            putString(
+                "${screenData.record} $SHARED_PREFERENCES_DATE_KEY",
+                binding.editTextDate.text.toString()
+            )
         }
     }
 
@@ -87,7 +114,7 @@ class EditRecordActivity : AppCompatActivity() {
     ) : Serializable
 
 
-    companion object{
+    companion object {
 
         const val SHARED_PREFERENCES_RECORD_KEY = "record"
         const val SHARED_PREFERENCES_DATE_KEY = "date"
