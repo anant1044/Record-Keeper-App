@@ -1,6 +1,5 @@
 package com.anantjava.recordkeeper
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +16,6 @@ import com.anantjava.recordkeeper.databinding.ActivityMainBinding
 import com.anantjava.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
-
 
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
@@ -98,12 +96,16 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setPositiveButton("Yes") { _, _ ->
                 when (selected) {
                     ALL_DISPLAY_VALUE -> {
-                        getSharedPreferences(RunningFragment.RUNNING_FILENAME, Context.MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences(CyclingFragment.CYCLING_FILENAME, Context.MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                     }
 
-                    else -> {
-                        getSharedPreferences(selected, Context.MODE_PRIVATE).edit { clear() }
+                    RUNNING_DISPLAY_VALUE -> {
+                        getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                    }
+
+                    CYCLING_DISPLAY_VALUE -> {
+                        getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                     }
                 }
                 refreshCurrentFragment()

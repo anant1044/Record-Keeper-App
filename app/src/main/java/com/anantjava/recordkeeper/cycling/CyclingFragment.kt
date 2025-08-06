@@ -37,7 +37,7 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayrecords() {
-        val references = requireContext().getSharedPreferences(CYCLING_FILENAME, Context.MODE_PRIVATE)
+        val references = requireContext().getSharedPreferences(FILENAME, Context.MODE_PRIVATE)
 
         binding.textViewLongrideRecord.text = references.getString("Longest Ride ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
         binding.textviewLongrideDate.text = references.getString("Longest Ride ${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
@@ -73,7 +73,7 @@ class CyclingFragment : Fragment() {
 
     private fun setupClicklistener(distance: String, hint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra(INTENT_SCREEN_DATA, EditRecordActivity.ScreenData(hint, distance, CYCLING_FILENAME))
+        intent.putExtra(INTENT_SCREEN_DATA, EditRecordActivity.ScreenData(hint, distance, FILENAME))
         startActivity(intent)
 
 
@@ -81,7 +81,7 @@ class CyclingFragment : Fragment() {
 
     companion object{
 
-        const val CYCLING_FILENAME = "cycling"
+        const val FILENAME = "cycling"
     }
 
 }

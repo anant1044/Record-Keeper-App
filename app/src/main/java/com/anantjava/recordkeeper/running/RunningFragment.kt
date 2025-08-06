@@ -39,7 +39,7 @@ class RunningFragment : Fragment() {
     }
 
     private fun displayRecords() {
-        val references = requireContext().getSharedPreferences(RUNNING_FILENAME, Context.MODE_PRIVATE)
+        val references = requireContext().getSharedPreferences(FILENAME, Context.MODE_PRIVATE)
         binding.textView5kmRecord.text = references.getString("5km ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
         binding.textView5kmDate.text = references.getString("5km ${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
         binding.textView10kmRecord.text = references.getString("10km ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
@@ -60,14 +60,14 @@ class RunningFragment : Fragment() {
 
     private fun setupClickRunningRecord(distance: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra(INTENT_SCREEN_DATA, EditRecordActivity.ScreenData("Time", distance, RUNNING_FILENAME))
+        intent.putExtra(INTENT_SCREEN_DATA, EditRecordActivity.ScreenData("Time", distance, FILENAME))
         startActivity(intent)
     }
 
 
     companion object{
 
-        const val RUNNING_FILENAME = "running"
+        const val FILENAME = "running"
     }
 
 }
