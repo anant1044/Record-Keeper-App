@@ -18,7 +18,10 @@ import com.anantjava.recordkeeper.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 
+
+
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+
 
     private lateinit var binding: ActivityMainBinding
 
@@ -67,17 +70,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         val menuclickHandle = when (item.itemId) {
             R.id.item_resetrunning -> {
-                clearRecordsDialog("running")
+                clearRecordsDialog(RUNNING_DISPLAY_VALUE)
                 true
             }
 
             R.id.item_resetcycling -> {
-                clearRecordsDialog("cycling")
+                clearRecordsDialog(CYCLING_DISPLAY_VALUE)
                 true
             }
 
             R.id.item_resetall -> {
-                clearRecordsDialog("all")
+                clearRecordsDialog(ALL_DISPLAY_VALUE)
                 true
             }
 
@@ -94,9 +97,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure you want to delete the records?")
             .setPositiveButton("Yes") { _, _ ->
                 when (selected) {
-                    "all" -> {
-                        getSharedPreferences("running", Context.MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences("cycling", Context.MODE_PRIVATE).edit { clear() }
+                    ALL_DISPLAY_VALUE -> {
+                        getSharedPreferences(RunningFragment.RUNNING_FILENAME, Context.MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CyclingFragment.CYCLING_FILENAME, Context.MODE_PRIVATE).edit { clear() }
                     }
 
                     else -> {
@@ -151,6 +154,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         R.id.running_icon -> onRunningCLicked()
         R.id.cycling_icon -> onCyclingCLicked()
         else -> false
+    }
+
+    companion object{
+
+        const val RUNNING_DISPLAY_VALUE = "running"
+        const val CYCLING_DISPLAY_VALUE = "cycling"
+        const val ALL_DISPLAY_VALUE = "all"
     }
 
 }

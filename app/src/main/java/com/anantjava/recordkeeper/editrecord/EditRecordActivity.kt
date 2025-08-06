@@ -11,6 +11,8 @@ import com.anantjava.recordkeeper.R
 import com.anantjava.recordkeeper.databinding.ActivityEditRecordBinding
 import java.io.Serializable
 
+const val INTENT_SCREEN_DATA = "screendata"
+
 class EditRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditRecordBinding
     private val references: SharedPreferences by lazy {
@@ -21,7 +23,7 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private val screenData: ScreenData by lazy {
-        intent.getSerializableExtra("screendata") as ScreenData
+        intent.getSerializableExtra(INTENT_SCREEN_DATA) as ScreenData
     }
 
 
@@ -58,23 +60,23 @@ class EditRecordActivity : AppCompatActivity() {
 
     private fun displayRecords() {
 
-        binding.editTextRecord.setText(references.getString("${screenData.record} record", null))
-        binding.editTextDate.setText(references.getString("${screenData.record} date", null))
+        binding.editTextRecord.setText(references.getString("${screenData.record} $SHARED_PREFERENCES_RECORD_KEY", null))
+        binding.editTextDate.setText(references.getString("${screenData.record} $SHARED_PREFERENCES_DATE_KEY", null))
     }
 
     private fun saveRecords() {
 
 
         references.edit {
-            putString("${screenData.record} record", binding.editTextRecord.text.toString())
-            putString("${screenData.record} date", binding.editTextDate.text.toString())
+            putString("${screenData.record} $SHARED_PREFERENCES_RECORD_KEY", binding.editTextRecord.text.toString())
+            putString("${screenData.record} $SHARED_PREFERENCES_DATE_KEY", binding.editTextDate.text.toString())
         }
     }
 
     private fun clearRecords() {
         references.edit {
-            remove("${screenData.record} record")
-            remove("${screenData.record} date")
+            remove("${screenData.record} $SHARED_PREFERENCES_RECORD_KEY")
+            remove("${screenData.record} $SHARED_PREFERENCES_DATE_KEY")
         }
     }
 
@@ -83,4 +85,12 @@ class EditRecordActivity : AppCompatActivity() {
         val record: String,
         val sharedpreference: String
     ) : Serializable
+
+
+    companion object{
+
+        const val SHARED_PREFERENCES_RECORD_KEY = "record"
+        const val SHARED_PREFERENCES_DATE_KEY = "date"
+    }
+
 }

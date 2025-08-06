@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.anantjava.recordkeeper.databinding.CyclingFragmentBinding
 import com.anantjava.recordkeeper.editrecord.EditRecordActivity
+import com.anantjava.recordkeeper.editrecord.INTENT_SCREEN_DATA
 
 class CyclingFragment : Fragment() {
 
@@ -36,16 +37,16 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayrecords() {
-        val references = requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
+        val references = requireContext().getSharedPreferences(CYCLING_FILENAME, Context.MODE_PRIVATE)
 
-        binding.textViewLongrideRecord.text = references.getString("Longest Ride record", null)
-        binding.textviewLongrideDate.text = references.getString("Longest Ride date", null)
-        binding.textViewBiggestclimbRecord.text = references.getString("Biggest Climb record", null)
-        binding.textviewBiggestclimbDate.text = references.getString("Biggest Climb date", null)
+        binding.textViewLongrideRecord.text = references.getString("Longest Ride ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        binding.textviewLongrideDate.text = references.getString("Longest Ride ${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
+        binding.textViewBiggestclimbRecord.text = references.getString("Biggest Climb ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        binding.textviewBiggestclimbDate.text = references.getString("Biggest Climb ${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
         binding.textViewBstAvgSpeedRecord.text =
-            references.getString("Best Average Speed record", null)
+            references.getString("Best Average Speed ${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
         binding.textviewBestavgspeedDate.text =
-            references.getString("Best Average Speed date", null)
+            references.getString("Best Average Speed ${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
 
     }
 
@@ -72,11 +73,15 @@ class CyclingFragment : Fragment() {
 
     private fun setupClicklistener(distance: String, hint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screendata", EditRecordActivity.ScreenData(hint, distance, "cycling"))
+        intent.putExtra(INTENT_SCREEN_DATA, EditRecordActivity.ScreenData(hint, distance, CYCLING_FILENAME))
         startActivity(intent)
 
 
     }
 
+    companion object{
+
+        const val CYCLING_FILENAME = "cycling"
+    }
 
 }
