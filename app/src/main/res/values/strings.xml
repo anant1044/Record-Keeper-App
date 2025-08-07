@@ -4,8 +4,8 @@
     <string name="cycling">Cycling</string>
     <string name="running_heading">Running</string>
     <string name="heading_10km">10km</string>
-    <string name="heading_half">half marathon</string>
-    <string name="heading_marathon">marathon</string>
+    <string name="heading_half">Half marathon</string>
+    <string name="heading_marathon">Marathon</string>
     <string name="cycling_heading">Cycling</string>
     <string name="longest_ride_heading">Longest Ride</string>
     <string name="best_average_speed">Best Average Speed</string>

@@ -65,12 +65,11 @@
                 android:id="@+id/container_longestride">
 
                 <TextView
+                    style="@style/RecordNameAppearance"
                     android:id="@+id/textview_longride_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/longest_ride_heading"
-                    android:textColor="#448075"
-                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +77,7 @@
                     android:id="@+id/textView_longride_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    style="@style/RecordValueAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="22:00" />
@@ -87,6 +86,7 @@
                     android:id="@+id/textview_longride_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/RecordDateAppearance"
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView_longride_record"
@@ -107,13 +107,12 @@
                 android:padding="12dp"
                 android:id="@+id/container_biggestclimb">
 
-                <TextView
+                <TextView  style="@style/RecordNameAppearance"
                     android:id="@+id/textview_biggestclimb_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/biggest_climb"
-                    android:textColor="#448075"
-                    android:textSize="18sp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,12 +120,12 @@
                     android:id="@+id/textView_biggestclimb_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    style="@style/RecordValueAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="22:00" />
 
-                <TextView
+                <TextView style="@style/RecordDateAppearance"
                     android:id="@+id/textview_biggestclimb_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -150,13 +149,12 @@
                 android:padding="12dp"
                 android:id="@+id/container_bestavgspd">
 
-                <TextView
+                <TextView  style="@style/RecordNameAppearance"
                     android:id="@+id/textview_bst_avg_speed_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/best_average_speed"
-                    android:textColor="#448075"
-                    android:textSize="18sp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -164,12 +162,12 @@
                     android:id="@+id/textView_bst_avg_speed_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    style="@style/RecordValueAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="22:00" />
 
-                <TextView
+                <TextView style="@style/RecordDateAppearance"
                     android:id="@+id/textview_bestavgspeed_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
